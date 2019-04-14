@@ -8,6 +8,6 @@ clean::
 install::
 	-rm -rf $(INC)
 	mkdir -p $(INC)
-	cpdir . $(INC)
+	cp -r . $(INC)
 	@chown -R bin $(INC)
 	@rm -f $(INC)/Makefile
