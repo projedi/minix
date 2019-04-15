@@ -1,6 +1,7 @@
 #!/bin/sh
 
 CONTAINER_ROOT=build_container
+RUN_SCRIPT=run.sh
 
 if [[ $EUID -ne 0 ]]; then
    echo "Run as root"
@@ -10,10 +11,12 @@ fi
 rm -rf $CONTAINER_ROOT
 mkdir -p $CONTAINER_ROOT
 pacstrap -c $CONTAINER_ROOT base base-devel
-cat <<EOF > $CONTAINER_ROOT/root/run.sh
+cat <<EOF > $CONTAINER_ROOT/$RUN_SCRIPT
 #!/bin/sh
 
-cd /root/src/tools
+cd /root/src
 make image
 EOF
-chmod +x $CONTAINER_ROOT/root/run.sh
+chmod +x $CONTAINER_ROOT/$RUN_SCRIPT
+
+systemd-nspawn -D $CONTAINER_ROOT --bind=+/../:/root/src /$RUN_SCRIPT

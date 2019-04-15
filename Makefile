@@ -15,6 +15,7 @@ usage:
 	@echo "	make install    # Compile and install commands" >&2
 	@echo "	make depend     # Generate required .depend files" >&2
 	@echo "	make clean      # Remove all compiler results" >&2
+	@echo "	make image      # Build image" >&2
 	@echo "" >&2
 	@echo "Run 'make' in tools/ to create a new MINIX configuration." >&2; exit 0
 	@echo "" >&2
@@ -28,6 +29,9 @@ usage:
 # 
 # etcfiles has to be done first.
 world: includes depend libraries cmds install postinstall
+
+image: world
+	cd tools && $(MAKE) image
 
 includes:
 	cd include && $(MAKE) install
