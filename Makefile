@@ -30,7 +30,7 @@ usage:
 # etcfiles has to be done first.
 world: includes depend libraries cmds install postinstall
 
-image: world
+image: etcfiles world
 	cd tools && $(MAKE) image
 
 includes:

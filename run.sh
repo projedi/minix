@@ -15,8 +15,12 @@ cat <<EOF > $CONTAINER_ROOT/$RUN_SCRIPT
 #!/bin/sh
 
 cd /root/src
+
+cp etc/group /etc/group
+cp etc/passwd /etc/passwd
+
 make image
 EOF
 chmod +x $CONTAINER_ROOT/$RUN_SCRIPT
 
-systemd-nspawn -D $CONTAINER_ROOT --bind=+/../:/root/src /$RUN_SCRIPT
+systemd-nspawn -D $CONTAINER_ROOT --bind=+/../:/root/src --capability=CAP_MKNOD /$RUN_SCRIPT
