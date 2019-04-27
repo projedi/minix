@@ -17,6 +17,19 @@
 # 2. home: base=32832,last=1572927,size=1540096
 # 3. usr: base=1572928,last=8385929,size=6813002
 
+# TODO: Build Minix image on Linux host.
+# 1. Make a bootable image from inside Minix:
+#    a) Run VM with two drives.
+#    b) Partition the secondary drive and format it.
+#    c) Put bootloader into the secondary drive.
+#    d) Copy all the files from the primary to the secondary drive.
+#    e) Try to boot VM from the secondary drive.
+# 2. Tweak buildscript to install files into the chosen directory
+#    and do it for the secondary drive instead of step 1.d.
+# 3. Move step 1.b to Linux host.
+# 4. Move step 1.c to Linux host.
+# 5. Run compilation from Linux host.
+
 # Start from golden image.
 cp minix-orig.img minix.img
 
